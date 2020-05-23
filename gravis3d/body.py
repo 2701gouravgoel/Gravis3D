@@ -13,7 +13,7 @@ class Body():
         self.mass = (4/3)*pi*(self.radius**3)*self.density
         self.pos = pos or vector(0,0,0)
         self.velocity = velocity or vector(0,0,0)
-        self.color = colour or color.orange
+        self.color = colour or color.green
         self.ball = sphere(pos = self.pos, radius = self.radius, color = self.color,
                            make_trail=True, trail_type='points', interval=100, retain=20)
 
@@ -29,15 +29,15 @@ class Body():
         #attractor.velocity -= force*dt
         #Sattractor.move()
         self.move()
-
     def is_collision(self, other):
-        if mag(self.pos-other.pos) <= mag(self.radius) + mag(other.radius) :
+        if (mag(self.pos-other.pos) <= self.radius + other.radius):
             return True
         else:
             return False
 
     def merged(self, other):
-        mass = self.mass + other.mass
-        radius = (0.75*(1/pi)*(1/1408)*mass)*(1/3)
-        velocity = (self.mass*self.velocity + other.mass*other.velocity)/(mass)
-        return mass, radius, velocity
+        m = self.mass + other.mass
+        radius = (0.75*(1/pi)*(1/1408)*m)*(1/3)
+        v = (self.mass*self.velocity + other.mass*other.velocity)/(m)
+        position = (self.pos*self.mass + other.pos*other.mass)/(m)
+        return m, radius, v,position
