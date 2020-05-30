@@ -41,7 +41,6 @@ class Nbodies:
                             self.bodies.remove(self.bodies[j-1])
                         else:
                             self.bodies.remove(self.bodies[j])
-                        #print(r)
                         d = (3*m)/(4*pi*r*r*r)
                         newbody = Body(radius=r,pos=p,velocity=v, colour=color.orange ,density=d)
                         self.bodies.append(newbody)
